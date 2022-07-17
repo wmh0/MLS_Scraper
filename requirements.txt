@@ -1,0 +1,4 @@
+bs4>=4.10.0
+pandas
+json
+argparse>=1.1
