@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:db="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Login</title>
+  <link id="fontawesome" rel="stylesheet" type="text/css" href="https://cdn.clareitysecurity.net/css/font-awesome-4.6.3.min.css">
+  <link id="favicon" rel="icon" type="image/png" href="https://cdn.clareitysecurity.net/images/corelogic-favicon.png" sizes="32x32" />
+  <link id="bootstrapcss" href="https://cdn.clareitysecurity.net/sys/treb/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.clareitysecurity.net/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+  <script src="https://cdn.clareitysecurity.net/js/ie-emulation-modes-warning.js"></script>
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+	<link id="logincss" rel="stylesheet" href="https://cdn.clareitysecurity.net/sys/treb/treb-login-2020.css">
+  <style>
+  div[contenteditable="true"]:empty::before, div[contenteditable="true"]:empty:not(:focus)::before{
+    font-style:  normal !important;
+    font-family: Effra !important;
+  }
+  .form-control{margin-bottom: 10px !important}
+
+  </style>
+
+  </head>
+    <body>
+<div>
+    
+    <script>
+        // If banner notification is displayed, hide it when the close icon is clicked
+        document.querySelectorAll(".banner-close-button-div").forEach(function (item) {
+            if (item.addEventListener) {
+                item.addEventListener("click", function () {
+                    let element = this.closest(".banner-outer-div");
+                    this.closest(".banner-container").removeChild(element);
+                });
+            } else if (item.attachEvent) {
+                item.attachEvent("onclick", function () {
+                    this.closest(".banner-outer-div").style.display = "none";
+                });
+            }
+        });
+    </script>
+    <style>.banner-container {
+    display: flex;
+    flex-direction: column-reverse;
+    width:100%;
+    z-index: 3;
+    top: 0;
+    left: 0;
+}
+
+.banner-outer-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 80px;
+    width: 100%;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .1);
+    border-top: 3px solid #fff;
+    background-color: #000;
+}
+
+.banner-outer-div:last-child {
+    border-top: none;
+}
+
+.banner-outer-div .banner-left-pad-div {
+    flex-basis: 5%;
+}
+
+.banner-outer-div .banner-span-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 90%;
+}
+
+.banner-outer-div .banner-span-div .banner-content-span {
+    color: #fff;
+}
+
+.banner-outer-div .banner-link-a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 900;
+}
+
+.banner-outer-div .banner-link-a:hover {
+    text-decoration: underline;
+}
+
+.banner-outer-div .banner-close-button-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    flex-basis: 5%;
+}
+
+.banner-outer-div .banner-close-button {
+    color: #fff;
+    padding-right: 90%;
+    background: none;
+    border: none;
+}
+
+.banner-title {
+    font-weight:bold;
+}
+</style>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</div>
+<div>
+    
+    <script>
+        // If popup notification is displayed, hide it when the close icon is clicked
+        document.querySelectorAll(".popup-close-button").forEach(function (item) {
+            if (item.addEventListener) {
+                item.addEventListener("click", function () {
+                    this.closest(".popup-container").remove();
+                });
+            } else if (item.attachEvent) {
+                item.attachEvent("onclick", function () {
+                    this.closest(".popup-outer").style.display = "none";
+                });
+            }
+        });
+    </script>
+    <style>.popup-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    padding: 24px 24px 120px 24px;
+    z-index: 10;
+}
+
+.popup-outer-outer {
+    position: absolute;
+    /*height: 5vh;*/
+}
+
+.popup-outer {
+    display: flex;
+    width: 600px;
+    max-height: 60vh;
+    z-index: 2;
+    background-color: #fff;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .1);
+    color: #4E5266;
+    border-radius: 20px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    overflow: auto;
+}
+
+.popup-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 15px;
+    margin-left: 5px;
+    overflow: auto;
+}
+
+.popup-title {
+    font-weight:bold;
+    color: #4E5266;
+    margin-top: 16px;
+    padding-bottom: 20px;
+    font-size: 20px;
+}
+
+.popup-content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 40vw;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    color: #4E5266;
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+}
+
+.popup-content img {
+    display: flex;
+    max-width: 500px;
+    max-height: 250px;
+}
+
+.popup-close {
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.popup-close-button {
+    color: #4E5266;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.popup-cta {
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 25px;
+}
+
+.popup-cta button {
+    height: 50px;
+    min-width: 40%;
+    border-radius: 22px;
+    border:none;
+    font-size: 14px;
+    background-color: #092A56;
+}
+
+.popup-cta a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.popup-cta-a:hover {
+    text-decoration: underline;
+}
+
+.pop-up-img-wrapper {
+    display: flex;
+    width: 100%;
+    height: 200px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.pop-up-img-wrapper img {
+    width: 100%;
+    max-width: 500px;
+    height: 100%;
+    max-height: 250px;
+    border-radius: 20px;
+    margin: auto;
+}
+
+@media screen and (max-width: 599px) {
+    .popup-outer {
+        width: unset;
+    }
+}
+</style>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</div>
+      <script id="googletrack" src="https://cdn.clareitysecurity.net/sys/treb/googletrack.js" type="text/javascript"></script>
+              <!-- Top content -->
+              <div class="top-content">
+                  <div class="inner-bg">
+                      <div class="container">
+                        <div class="row">
+                          <div id="logo" class="row text-center col-sm-4" >
+                            <p><img src="https://cdn.clareitysecurity.net/sys/treb/treb-2020-logo.png" alt="Toronto Regional Real Estate Board" style="padding-left:15px; padding-bottom:10px"/><br>
+                            </p>
+                          </div>
+                        </div>
+      										<div id="shownotification"  style="color:#e8302e;"></div>
+                          <div class="row">
+                              <div class="col-md-4 col-sm-6 col-sm">
+                                <div id="form_login_wrapper">
+                                  
+                                  <div class="form-bottom" style="background-color: #BBBCBC;">
+                                  <div id="divholder" class="form-signin">
+                                    <label for="person" class="sr-only">Enter your User ID</label>
+                                    <div id="j_username-placeholder" style="display:none;font-size:12px;color: rgb(0, 107, 211);">Enter your User ID</div>
+                                    <div class="editicon usericon"><i class="fa fa-user"></i></div>
+                                    <div class="form-control person" data-ph="Enter your User ID" id="clareity" contenteditable="true" required></div>
+                                    <label for="lock" class="sr-only">Enter your PIN #</label>
+                                    <div id="pin-placeholder" style="display:none;font-size:12px;color: rgb(0, 107, 211);">Enter your PIN #</div>
+                                    <div class="editicon passicon"><i class="fa fa-key"></i></div>
+                                    <div class="form-control pin" data-ph="Enter your PIN #" id="pin" contenteditable="true" required></div>
+                                    <label for="lock" class="sr-only">Enter your Authenticator Password</label>
+                                    <div id="password-placeholder" style="display:none;font-size:12px;color: rgb(0, 107, 211);">Enter your Authenticator Password</div>
+                                    <div class="editicon passicon"><i class="fa fa-lock"></i></div>
+                                    <div class="form-control lock" data-ph="Enter your Authenticator Password" id="security" contenteditable="true" required></div>
+                                  </div>
+                                    <form id="form_login" action="" method='POST'>
+                                        <div style="display:none">
+                                            <input id="form-clareity" name="username" type="hidden" tabindex="-1" required/>
+                                            <input id="form-security" name="password" type="hidden" tabindex="-2" required/>
+                                            <input id="form-pin" name="pin" type="hidden" tabindex="-3" required/>
+                                        </div>
+                                            <button id="loginbtn" class="btn btn-lg btn-primary btn-block" type="button"><strong>Click Here to Log On</strong></button>
+                                    </form>
+                                    </div>
+                                    <div class="agreement" style="padding:5px;">
+                                      <p style="color:#BBBCBC; font-size:10px">
+                                        <strong>By clicking on the &quot;Log On&quot; button you are confirming that the Toronto Regional Real Estate Board has authorized your use of the User ID, PIN and Password entered and that you are an Authorized User. Fraudulently accessing the system using someone else's User ID, PIN, and Password are criminal offences punishable by up to ten years imprisonment and may result in statutory and contractual damages.</strong></p>
+                                      <p class="copyright">Copyright&reg; Toronto Regional Real Estate Board <script>document.write(new Date().getFullYear())</script>.</p>
+                                    </div>
+                                </div>
+                              </div>
+                        <div class="col-sm-6 col-sm">
+                              	<div class="form-top">
+                              	  <ul>
+                                      <li><a href="https://treb.clareityiam.net/token/lost" target="_blank">I lost my token/phone</a></li>
+                                      <li><a href="https://treb.clareityiam.net/token/broken" target="_blank">My token/phone is broken</a></li>
+                                      <li><a href="https://treb.clareityiam.net/forgotpin" target="_blank">I forgot my PIN</a></li>
+                                      <li><a href="https://treb.clareityiam.net/changepin" target="_blank">I want to change my PIN</a></li>
+                                      <li><span id="enrollauth" class="link">I need to enroll my Authenticator App</span></li>
+                                      <li><span id="enrollharware" class="link">I need to enroll my Hardware Token</span></li>
+                                    </ul>
+                              	  <p>Need help? Call TRREB's Helpdesk at 416-443-8111.</p>
+                 	              </div>
+                          </div>
+                      </div>
+      					    </div>
+                </div>
+            </div>
+
+              <script id="jqueryjs" type="text/javascript" src="https://cdn.clareitysecurity.net/js/jquery-3.3.1.min.js"></script>
+              <script id="loginscript" src="https://cdn.clareitysecurity.net/js/script-xkd.2.js"></script>
+              <script id="bootstrapjs" src="https://cdn.clareitysecurity.net/js/bootstrap.min.js"></script>
+
+              <script>
+              function getCookie(cname) {
+                  var name = cname + "=";
+                  var decodedCookie = decodeURIComponent(document.cookie);
+                  var ca = decodedCookie.split(';');
+                  for(var i = 0; i < ca.length; i++) {
+                      var c = ca[i];
+                      while (c.charAt(0) == ' ') {
+                          c = c.substring(1);
+                      }
+                      if (c.indexOf(name) == 0) {
+                          return c.substring(name.length, c.length);
+                      }
+                  }
+                  return "";
+              }
+              var enrollcookievar = "";
+              function checkCookie() {
+                  enrollcookievar = getCookie("enrollcookie");
+                  if (enrollcookievar != "") {
+                      document.cookie="enrollcookie=;expires=Wed; 01 Jan 1970";
+                      $('#failuremsg').html('<p class="alert alert-danger" role="alert">Please enter your credentials below to continue with enrollment.</p>');
+                  }
+              }
+              function setEnrollCookie() {
+                  document.cookie="enrollcookie=set;expires=Wed, 18 Dec 2023 12:00:00 GMT";
+              }
+              $("#enrollharware").click(function() {
+                setEnrollCookie();
+                 window.location = "https://treb.clareityiam.net/enroll/?hardware=true";
+              });
+
+              $("#enrollauth").click(function() {
+                setEnrollCookie();
+                 window.location = "https://treb.clareityiam.net/enroll";
+              });
+
+              $(function () {
+                checkCookie();
+              });
+
+              $(".person").focus(function() {
+                $("#j_username-placeholder").show();
+                $("#password-placeholder").hide();
+                $("#pin-placeholder").hide();
+              });
+              $(".pin").focus(function() {
+                $("#j_username-placeholder").hide();
+                $("#password-placeholder").hide();
+                $("#pin-placeholder").show();
+              });
+              $(".lock").focus(function() {
+                $("#j_username-placeholder").hide();
+                $("#password-placeholder").show();
+                $("#pin-placeholder").hide();
+              });
+
+              </script>
+
+      				<!-- <script id="publicnotejs" type="text/javascript" src="https://cdn.clareitysecurity.net/sys/treb/publicnote-treb.js" data-noteurl="https://dashboard.qa.clareity.net/rest/public/notifications?systemName=ctmls" data-noteui="div"></script> -->
+              <script id="publicnotejs" type="text/javascript" src="https://cdn.clareitysecurity.net/sys/treb/publicnote-treb.js" data-noteurl="https://treb.clareity.net/rest/public/notifications?systemName=treb" data-noteui="div"></script>
+
+              <!--[if lt IE 10]>
+                  <script src="https://cdn.clareitysecurity.net/sys/treb/placeholder.js"></script>
+              <![endif]-->
+
+              <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+              <script src="https://cdn.clareitysecurity.net/js/ie10-viewport-bug-workaround.js"></script>
+
+      				<div id="pleasewait" class="modal fade" tabindex="-1" role="dialog">
+      				  <div class="modal-dialog" role="document">
+      				    <div class="modal-content">
+      				      <div class="modal-body text-center">
+      				        <p>Please wait a moment while we validate your credentials ...</p>
+      								<p>
+      									<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+      									<span class="sr-only">Loading...</span>
+      								</p>
+      				      </div>
+      				    </div><!-- /.modal-content -->
+      				  </div><!-- /.modal-dialog -->
+      				</div><!-- /.modal -->
+
+    <div style="display: none">
+        <div >
+    <script>
+        CLAREITY = {
+            collectorSystemName: 'treb',
+            collectorUrl: 'https://collector.clareity.net',
+            tic: 1653754687338
+        };
+
+    </script>
+    <script>var fingerprintOn = false;
+
+var CLAREITY_FP = {
+
+		//Return the fingerprint for this computer
+		getFingerprint: function () {
+            console.log('fingerprint on');
+
+            fingerprintOn = true;
+
+			var fingerprint = [];
+			CLAREITY_FP.getBasics(fingerprint);
+			CLAREITY_FP.getDatabase(fingerprint);
+			CLAREITY_FP.getPluginsString(fingerprint);
+			CLAREITY_FP.getCanvas(fingerprint);
+			return fingerprint;
+		},
+		
+		//return the basic browser's characteristics
+		getBasics: function (fingerprint) {
+			fingerprint['resolution'] = window.screen.width + "x" + window.screen.height;
+			fingerprint['userAgent'] = navigator.userAgent;
+			fingerprint['language'] = navigator.language;
+			fingerprint['timezone'] = new Date().getTimezoneOffset();
+			fingerprint['platform'] = navigator.platform;
+			fingerprint['path'] = window.location.pathname;
+		},
+		
+		//return the browser's database capabilities
+		getDatabase: function (fingerprint) {
+			fingerprint['db0'] = (!!window.indexedDB);
+			fingerprint['db1'] = (typeof(window.openDatabase));
+		},
+		
+		//return a list (as string) of all installed plugins
+		getPluginsString: function (fingerprint) {
+			var miniPlugins = "";
+			for(var i = 0 ; i < navigator.plugins.length; i++) {
+				miniPlugins += String(navigator.plugins[i]['name']).replace(new RegExp("[ ]", 'g'), "") + " ";
+			}
+			fingerprint['plugins'] = miniPlugins;
+		},
+		
+		//return a semi unique id based on a canvas fingerprint
+		getCanvas: function (fingerprint) {
+			try {
+				var elem = document.createElement('canvas');
+				if (!!(elem.getContext && elem.getContext('2d'))) {
+					var canvas = document.createElement('canvas');
+					var ctx = canvas.getContext('2d');
+					var txt = 't';
+					try {ctx.font = "14px Arial";} catch (e1) {}
+					ctx.textBaseline = "alphabetic";
+					ctx.fillStyle = "#abc";
+					ctx.fillRect(125,1,62,20);
+					ctx.fillStyle = "#093";
+					var hash = hashString(canvas.toDataURL());
+					fingerprint['canvas'] = hash;
+				} else {
+					fingerprint['canvas'] = "none";
+				}
+			} catch (e2) {
+				fingerprint['canvas'] = "none";
+			}
+		},
+		
+		
+		hashString: function (string) {
+			hash = [];
+			var offset = string.length / 19;
+			for(var i = 0; i < 20; i++) {
+				hash[i] = Math.round(i * offset * 1000) / 1000;
+			}
+			return String(hash).replace(new RegExp("[,\.]", 'g'), "");
+		}
+
+} /* end CLAREITY_FP */
+
+var CLAREITY_NG = {
+		
+		collect: function () {
+			var fingerprint = CLAREITY_FP.getFingerprint();
+			CLAREITY_NG.nguage(fingerprint);
+		},
+		readCookie: function(name) {
+			var nameEQ = name + "=";
+	        var ca = document.cookie.split(';');
+	        for (var i = 0; i < ca.length; i++) {
+	            var c = ca[i];
+	            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+	            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+	        }
+	        return null;
+		},
+		nguage: function (fingerprint) {
+			
+			var transactionId = CLAREITY_NG.readCookie("clareitysecurity-tid");
+			var deviceId = CLAREITY_NG.readCookie("clareitysecurity-did");
+			
+			var url;
+			if (transactionId && deviceId) {
+				 url = CLAREITY.collectorUrl + "/Collector/" + CLAREITY.tic + "?team=nguage&trxId=" + transactionId + "&deviceId=" + deviceId + "&systemName=" + CLAREITY.collectorSystemName + "&data=";
+			} else {
+				 url = CLAREITY.collectorUrl + "/Collector/" + CLAREITY.tic + "?team=nguage&systemName=" + CLAREITY.collectorSystemName + "&data=";
+			}
+				
+			var data = '{' +
+			    '"resolution":"' + escape(fingerprint['resolution']) + '", ' +
+				'"userAgent":"' + escape(fingerprint['userAgent']) + '", ' +
+				'"language":"' + escape(fingerprint['language']) + '", ' +
+				'"timezone":"' + escape(fingerprint['timezone']) + '", ' +
+				'"platform":"' + escape(fingerprint['platform']) + '", ' +
+				'"db0":"' + escape(fingerprint['db0']) + '", ' +
+				'"db1":"' + escape(fingerprint['db1']) + '", ' +
+				'"plugins":"' + escape(fingerprint['plugins']) + '", ' +
+				'"canvas":"' + escape(fingerprint['canvas']) + '" ' +
+				'}';
+		
+			url = url + data;
+			
+			(function(d, t) {
+			    var g = d.createElement(t),
+			        s = d.getElementsByTagName(t)[0];
+			    g.src = url;
+			    s.parentNode.insertBefore(g, s);
+			}(document, 'script'));
+		
+		}
+
+} /* end CLAREITY_NG */
+
+CLAREITY_NG.collect();
+
+var geolocationOn = false;
+
+var CLAREITY_GEO = {
+
+		getLocation: function () {
+			try {
+
+				console.log('geolocation on');
+
+                geolocationOn = true;
+
+				if (navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition(CLAREITY_GEO.showPosition, CLAREITY_GEO.noPosition);
+				}
+			} catch (ex) {}
+		},
+
+		noPosition: function (err) {
+			
+			var transactionId = CLAREITY_GEO.readCookie("clareitysecurity-tid");
+			var deviceId = CLAREITY_GEO.readCookie("clareitysecurity-did");
+			
+			var url;
+			if (transactionId && deviceId) {
+				 url = CLAREITY.collectorUrl + "/Collector/" + CLAREITY.tic + "?team=geo&trxId=" + transactionId + "&deviceId=" + deviceId + "&systemName=" + CLAREITY.collectorSystemName + "&data=";
+			} else {
+				 url = CLAREITY.collectorUrl + "/Collector/" + CLAREITY.tic + "?team=geo&systemName=" + CLAREITY.collectorSystemName + "&data=";
+			}
+			
+			var detail = err.code + " (" + err.message + ")";
+			var data = '{' +
+			    '"geoerror":"' + escape(detail) + '" ' +
+				'}';
+			
+			url = url + data;
+			
+			(function(d, t) {
+			    var g = d.createElement(t),
+			        s = d.getElementsByTagName(t)[0];
+			    g.src = url;
+			    s.parentNode.insertBefore(g, s);
+			}(document, 'script'));
+		
+		},		
+		readCookie: function(name) {
+			var nameEQ = name + "=";
+	        var ca = document.cookie.split(';');
+	        for (var i = 0; i < ca.length; i++) {
+	            var c = ca[i];
+	            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+	            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+	        }
+	        return null;
+		},
+		showPosition: function (position) {
+			var lat = position.coords.latitude;
+			var lng = position.coords.longitude;
+			var accuracy = position.coords.accuracy;
+			
+			var transactionId = CLAREITY_GEO.readCookie("clareitysecurity-tid");
+			var deviceId = CLAREITY_GEO.readCookie("clareitysecurity-did");
+			
+			var url;
+			if (transactionId && deviceId) {
+				 url = CLAREITY.collectorUrl + "/Collector/" + CLAREITY.tic + "?team=geo&trxId=" + transactionId + "&deviceId=" + deviceId + "&systemName=" + CLAREITY.collectorSystemName + "&data=";
+			} else {
+				 url = CLAREITY.collectorUrl + "/Collector/" + CLAREITY.tic + "?team=geo&systemName=" + CLAREITY.collectorSystemName + "&data=";
+			}
+			
+			var data = '{' +
+			    '"latitude":"' + escape(lat) + '", ' +
+				'"longitude":"' + escape(lng) + '", ' +
+				'"accuracy":"' + escape(accuracy) + '" ' +
+				'}';
+		
+			url = url + data;
+			
+			(function(d, t) {
+			    var g = d.createElement(t),
+			        s = d.getElementsByTagName(t)[0];
+			    g.src = url;
+			    s.parentNode.insertBefore(g, s);
+			}(document, 'script'));
+		}
+		
+} /* end CLAREITY_GEO */
+
+CLAREITY_GEO.getLocation();
+</script>
+</div>
+    </div>
+
+<script>
+var d = new Date();
+var months = ["january","february","march","april","may","june","july","august","september","october","november","december"];
+//document.getElementById("demo").innerHTML = months[d.getMonth()];
+$("body").addClass(months[d.getMonth()]);
+</script>
+  </body>
+</html>
